@@ -1,4 +1,4 @@
-#
+    #
 # Copyright (c) 2020 Red Hat Training <training@redhat.com>
 #
 # All rights reserved.
@@ -137,7 +137,7 @@ class Breakfix010Maintainencelvm(Default):
                 command='''
                 umount /mnt/data;
                 rm -rf /mnt/data;
-                lvremove /dev/vg01/lv01;
+                lvremove -f /dev/vg01/lv01;
                 vgremove vg01;
                 pvremove /dev/vdb1;
                 egrep -v -e '/dev/vg01/lv01 /mnt/data xfs defaults 0 0' /etc/fstab > /tmp/fstab && mv -f /tmp/fstab /etc/fstab;
