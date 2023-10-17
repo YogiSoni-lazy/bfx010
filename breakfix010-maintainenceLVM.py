@@ -45,6 +45,7 @@ class Breakfix010Maintainencelvm(Default):
                 ) | sudo fdisk /dev/vdb;
                 echo '/usr/bin/cp /etc/fstab /tmp/fstab-capture.out' >> /etc/rc.d/rc.local;
                 echo '/usr/bin/cp /proc/self/mounts /tmp/mounts-capture.out' >> /etc/rc.d/rc.local;
+                reboot;
                 ''',
                 shell=True,
             ),
