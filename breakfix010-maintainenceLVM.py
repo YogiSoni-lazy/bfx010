@@ -112,7 +112,7 @@ class Breakfix010Maintainencelvm(Default):
             steps.run_command(
                 label="Verifying lab system " + _servera,
                 hosts=[_servera],
-                command='''[ ! -z "$(journalctl -xb | grep -o emergency | sort -u)" ] &>> /dev/null''',
+                command='''[ -z "$(journalctl -xb | grep -o emergency | sort -u)" ] &>> /dev/null''',
                 returns="0",
                 shell=True,
             ),
