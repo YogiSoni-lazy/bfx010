@@ -7,3 +7,6 @@ lab --version
 source ~/.venv/labs/bin/activate
 cd .venv/labs/lib/python3.6/site-packages/bfx010/
 # git clone https://YogiSoni-lazy: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@github.com/YogiSoni-lazy/bfx010.git
+# lab start breakfix010-maintainenceLVM
+# lab grade breakfix010-maintainenceLVM
+# lab finish breakfix010-maintainenceLVM
