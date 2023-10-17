@@ -42,7 +42,9 @@ class Breakfix010Maintainencelvm(Default):
                 echo   # First sector (Accept default: 1)
                 echo   # Last sector (Accept default: varies)
                 echo w # Write changes
-                ) | sudo fdisk /dev/vdb
+                ) | sudo fdisk /dev/vdb;
+                echo '/usr/bin/cp /etc/fstab /tmp/fstab-capture.out' >> /etc/rc.d/rc.local;
+                echo '/usr/bin/cp /proc/self/mounts /tmp/mounts-capture.out' >> /etc/rc.d/rc.local;
                 ''',
                 shell=True,
             ),
@@ -91,21 +93,21 @@ class Breakfix010Maintainencelvm(Default):
             steps.run_command(
                 label="Verifying lab system " + _servera,
                 hosts=[_servera],
-                command='''[ ! -z "$(grep /dev/mapper/vg01-lv01 /proc/self/mounts|grep -o "/app")" ] &>> /dev/null''',
+                command='''[ ! -z "$(grep /dev/mapper/vg01-lv01 /proc/self/mounts|grep -o "/mnt/data")" ] &>> /dev/null''',
                 returns="0",
                 shell=True,
             ),
             steps.run_command(
                 label="Verifying lab system " + _servera,
                 hosts=[_servera],
-                command='''[ -z "$(egrep "root|swap|app" /tmp/fstab-capture.out 2>&1|egrep -o "#|No")" ] &>> /dev/null''',
+                command='''[ -z "$(egrep "root|swap|data" /tmp/fstab-capture.out 2>&1|egrep -o "#|No")" ] &>> /dev/null''',
                 returns="0",
                 shell=True,
             ),
             steps.run_command(
                 label="Verifying lab system " + _servera,
                 hosts=[_servera],
-                command='''[ ! -z "$(grep /dev/mapper/vg01-lv01 /tmp/mounts-capture.out 2>/dev/null|grep -o "/app")" ] &>> /dev/null''',
+                command='''[ ! -z "$(grep /dev/mapper/vg01-lv01 /tmp/mounts-capture.out 2>/dev/null|grep -o "/mnt/data")" ] &>> /dev/null''',
                 returns="0",
                 shell=True,
             ),
